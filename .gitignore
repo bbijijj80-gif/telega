@@ -1,19 +1,140 @@
-```bash
-# Environment
-.env
-.env.local
-*.env.*
+```gitignore
+# Build artifacts and binaries
+*.exe
+*.dll
+*.so
+*.a
+*.obj
+*.out
+*.pyc
+__pycache__/
+*.o
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
+# Dependencies
+node_modules/
+venv/
+.venv/
+lib/
+target/
+.gradle/
 
-# Editors
+# IDE and editor files
 .vscode/
 .idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
 
 # System files
 .DS_Store
 Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Generated serializer files
+**/NativeAot/**
+**/EventDataSerializers.g.cs
+**/MyJsonSerializeContext.g.cs
+**/MyMessengerJsonContext.g.cs
+**/*.g.cs
+
+# Certificate files
+**/*-key.pem
+**/*.pem
+
+# Docker related
+Dockerfile
+docker-compose.yml
+
+# Fody weavers
+FodyWeavers.xml
+FodyWeavers.xsd
+
+# Configuration files that might contain secrets
+appsettings.Production.json
+appsettings.*.json
+
+# OS generated files
+ehthumbs.db
+Icon?
+Network Trash Folder
+Temporary Items
+$RECYCLE.BIN/
+*.lnk
+
+# Development specific
+.vs/
+*.user
+*.userosscache
+*.suo
+*.pdb
+*.idb
+*.ilk
+*.iobj
+*.ipdb
+*.tlog
+*.metagen
+*.wrn
+*.xml
+*.manifest
+*.log
+*.lastcodeanalysissucceeded
+*.VC.db
+*.VC.VC.opendb
+*.VC.opendb
+*.aps
+*.ncb
+*.obj
+*.pch
+*.res
+*.rej
+*.sdf
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*-bak
+*.cache
+*.iws
+*.orig
+*.pid
+*.gem
+*.stackdump
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+*.core
+!.gitignore
 ```
