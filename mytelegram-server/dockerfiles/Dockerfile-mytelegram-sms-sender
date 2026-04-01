@@ -23,16 +23,16 @@ COPY ["src/MyTelegram.EventBus/MyTelegram.EventBus.csproj", "src/MyTelegram.Even
 COPY ["src/MyTelegram.Services/MyTelegram.Services.csproj", "src/MyTelegram.Services/"]
 COPY ["src/MyTelegram.EventFlow/MyTelegram.EventFlow.csproj", "src/MyTelegram.EventFlow/"]
 
-RUN dotnet restore  -a $TARGETARCH "./src/MyTelegram.SmsSender/MyTelegram.SmsSender.csproj"
+RUN dotnet restore -a "$TARGETARCH" "./src/MyTelegram.SmsSender/MyTelegram.SmsSender.csproj"
 COPY . .
 WORKDIR "/src/src/MyTelegram.SmsSender"
-RUN dotnet build "./MyTelegram.SmsSender.csproj"  -a $TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./MyTelegram.SmsSender.csproj"  -a "$TARGETARCH" -c "$BUILD_CONFIGURATION" --output /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 ARG TARGETARCH
-RUN dotnet publish "./MyTelegram.SmsSender.csproj"  -a $TARGETARCH -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./MyTelegram.SmsSender.csproj" -a "$TARGETARCH" -c "$BUILD_CONFIGURATION" --output /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final

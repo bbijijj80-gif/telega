@@ -36,16 +36,16 @@ COPY ["src/MyTelegram.ReadModel.MongoDB/MyTelegram.ReadModel.MongoDB.csproj", "s
 COPY ["src/MyTelegram.EventFlow.MongoDB/MyTelegram.EventFlow.MongoDB.csproj", "src/MyTelegram.EventFlow.MongoDB/"]
 COPY ["src/MyTelegram.ReadModel.InMemory/MyTelegram.ReadModel.InMemory.csproj", "src/MyTelegram.ReadModel.InMemory/"]
 
-RUN dotnet restore  -a $TARGETARCH "./src/MyTelegram.Messenger.QueryServer/MyTelegram.Messenger.QueryServer.csproj"
+RUN dotnet restore -a "$TARGETARCH" "./src/MyTelegram.Messenger.QueryServer/MyTelegram.Messenger.QueryServer.csproj"
 COPY . .
 WORKDIR "/src/src/MyTelegram.Messenger.QueryServer"
-RUN dotnet build "./MyTelegram.Messenger.QueryServer.csproj"  -a $TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./MyTelegram.Messenger.QueryServer.csproj"  -a "$TARGETARCH" -c "$BUILD_CONFIGURATION" --output /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 ARG TARGETARCH
-RUN dotnet publish "./MyTelegram.Messenger.QueryServer.csproj"  -a $TARGETARCH -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./MyTelegram.Messenger.QueryServer.csproj" -a "$TARGETARCH" -c "$BUILD_CONFIGURATION" --output /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
